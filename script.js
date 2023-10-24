@@ -18,8 +18,8 @@ function login() {
 
     auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            // Redirect to the appropriate account page
-            window.location.href = "omar_account.html";
+            // Redirect to the appropriate account page, passing the user's UID as a URL parameter
+            window.location.href = `omar_account.html?uid=${userCredential.user.uid}`;
         })
         .catch((error) => {
             alert("Invalid email or password: " + error.message);
