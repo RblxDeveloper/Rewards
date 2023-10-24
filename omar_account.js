@@ -9,37 +9,33 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth(); // Use firebase.auth() to get the authentication object
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 // Check if the user is authenticated and their UID matches the one provided in the URL
-firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-        // Check if the user's UID matches the provided UID in the URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const userUid = urlParams.get('uid');
-        if (user.uid === userUid) {
-            // User is authenticated and the URL matches their UID
-            // You can remove the code below if you don't want to display the username
-            const userRef = firebase.database().ref('users/' + user.uid); // Replace with your Realtime Database reference
-            userRef.once('value').then((snapshot) => {
-                if (snapshot.exists()) {
-                    const username = snapshot.val().username;
-                    document.getElementById("usernameDisplay").innerText = username;
-                }
-            }).catch((error) => {
-                console.error("Error getting user data:", error);
-            });
+onAuthStateChanged(auth, (user) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userUid = urlParams.get('uid');
+
+    if (user && user.uid === userUid) {
+        // User is authenticated and the URL matches their UID
+        const userRef = ref(getDatabase(), 'users/' + user.uid);
+        get(userRef).then((snapshot) => {
+            if (snapshot.exists()) {
+                const username = snapshot.val().username;
+                document.getElementById("usernameDisplay").innerText = username;
+            }
+        }).catch((error) => {
+            console.error("Error getting user data:", error);
+        });
+    } else {
+        // Redirect to the login page or display an error message
+        if (!user) {
+            // User is not signed in, redirect to the login page
+            window.location.href = "index.html";
         } else {
-            // Redirect to the login page or display an error message
-            window.location.href = "index.html"; // Redirect unauthorized users
             // Show the overlay for unauthorized access
             document.getElementById("overlay").style.display = "block";
         }
-    } else {
-        // User is not signed in, redirect to the login page
-        window.location.href = "index.html";
-        // Show the overlay for unauthorized access
-        document.getElementById("overlay").style.display = "block";
     }
 });
