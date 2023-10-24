@@ -16,15 +16,24 @@ const auth = getAuth(app);
 // Check if the user is authenticated and their UID matches the one provided in the URL
 onAuthStateChanged(auth, (user) => {
     if (user) {
+        // Check if the user's UID matches the provided UID in the URL
         const urlParams = new URLSearchParams(window.location.search);
         const userUid = urlParams.get('uid');
-
         if (user.uid === userUid) {
-            // User is authenticated, and their UID matches the one provided in the URL
-            // You can include code to display user-specific content here
+            // User is authenticated and the URL matches their UID
+            // You can remove the code below if you don't want to display the username
+            const userRef = ref(getDatabase(), 'users/' + user.uid);
+            get(userRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const username = snapshot.val().username;
+                    document.getElementById("usernameDisplay").innerText = username;
+                }
+            }).catch((error) => {
+                console.error("Error getting user data:", error);
+            });
         } else {
-            // Redirect unauthorized users
-            window.location.href = "index.html";
+            // Redirect to the login page or display an error message
+            window.location.href = "index.html"; // Redirect unauthorized users
         }
     } else {
         // User is not signed in, redirect to the login page

@@ -8,8 +8,10 @@ const firebaseConfig = {
     appId: "1:940514628130:web:974ddac0fb31f94386307b"
 };
 
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+// Define your login function
 function login() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
