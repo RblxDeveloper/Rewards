@@ -10,7 +10,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-function login() {
+function loginOmar() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
@@ -18,7 +18,7 @@ function login() {
 
     auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            // Redirect to the appropriate account page, passing the user's UID as a URL parameter
+            // Redirect to Omar's account page, passing the user's UID as a URL parameter
             window.location.href = `omar_account.html?uid=${userCredential.user.uid}`;
         })
         .catch((error) => {
@@ -26,7 +26,7 @@ function login() {
         });
 }
 
-function login() {
+function loginAnas() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
@@ -34,7 +34,7 @@ function login() {
 
     auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            // Redirect to the appropriate account page, passing the user's UID as a URL parameter
+            // Redirect to Anas's account page, passing the user's UID as a URL parameter
             window.location.href = `anas_account.html?uid=${userCredential.user.uid}`;
         })
         .catch((error) => {
