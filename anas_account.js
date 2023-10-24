@@ -1,11 +1,11 @@
 // Initialize Firebase with your project's configuration
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyBQLc54eUpd37mv0j8BvqiN8NBewP1SEvY",
+    authDomain: "rewards-p.firebaseapp.com",
+    projectId: "rewards-p",
+    storageBucket: "rewards-p.appspot.com",
+    messagingSenderId: "940514628130",
+    appId: "1:940514628130:web:974ddac0fb31f94386307b"
 };
 
 // Initialize Firebase

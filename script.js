@@ -25,3 +25,19 @@ function login() {
             alert("Invalid email or password: " + error.message);
         });
 }
+
+function login() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const auth = firebase.auth();
+
+    auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            // Redirect to the appropriate account page, passing the user's UID as a URL parameter
+            window.location.href = `anas_account.html?uid=${userCredential.user.uid}`;
+        })
+        .catch((error) => {
+            alert("Invalid email or password: " + error.message);
+        });
+}
