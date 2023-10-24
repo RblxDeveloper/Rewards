@@ -8,7 +8,6 @@ const firebaseConfig = {
     appId: "1:940514628130:web:974ddac0fb31f94386307b"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
@@ -21,16 +20,18 @@ onAuthStateChanged(auth, (user) => {
         const userUid = urlParams.get('uid');
         if (user.uid === userUid) {
             // User is authenticated and the URL matches their UID
-            // You can remove the code below if you don't want to display the username
-            const userRef = ref(getDatabase(), 'users/' + user.uid);
-            get(userRef).then((snapshot) => {
-                if (snapshot.exists()) {
-                    const username = snapshot.val().username;
-                    document.getElementById("usernameDisplay").innerText = username;
-                }
-            }).catch((error) => {
-                console.error("Error getting user data:", error);
-            });
+            // Include code to display user-specific content here
+            // ...
+
+            // If you want to display an overlay for unauthorized users
+            // you can add the following lines
+
+            // Check if the user is unauthorized (different from Anas or Omar)
+            const email = user.email;
+            if (email !== "darkshadowplayz1@gmail.com" && email !== "anas.mabdelmegid@hotmail.com") {
+                // Show the overlay for unauthorized access
+                document.getElementById("overlay").style display = "block";
+            }
         } else {
             // Redirect to the login page or display an error message
             window.location.href = "index.html"; // Redirect unauthorized users
