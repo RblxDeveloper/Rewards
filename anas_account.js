@@ -33,8 +33,10 @@ firebase.auth().onAuthStateChanged((user) => {
         if (!user) {
             // User is not signed in, redirect to the login page
             window.location.href = "index.html";
+            document.getElementById("overlay").style.display = "block";
         } else {
             // Show the overlay for unauthorized access
+            window.location.href = "index.html";
             document.getElementById("overlay").style.display = "block";
         }
     }
