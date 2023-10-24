@@ -33,10 +33,13 @@ firebase.auth().onAuthStateChanged((user) => {
         } else {
             // Redirect to the login page or display an error message
             window.location.href = "index.html"; // Redirect unauthorized users
+            // Show the overlay for unauthorized access
+            document.getElementById("overlay").style.display = "block";
         }
     } else {
         // User is not signed in, redirect to the login page
         window.location.href = "index.html";
+        // Show the overlay for unauthorized access
+        document.getElementById("overlay").style.display = "block";
     }
 });
-

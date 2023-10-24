@@ -5,13 +5,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="account-container">
-        <h2>Welcome to Anas's Account</h2>
-        <!-- Include user-specific content here -->
+    <!-- Overlay for unauthorized users -->
+    <div id="overlay" class="overlay">
+        <div class="overlay-content">
+            <h2>Unauthorized Access</h2>
+            <p>You are not authorized to access this account.</p>
+        </div>
     </div>
-   
-    <!-- Add an overlay div -->
-    <div id="overlay"></div>
+
+    <h2>Welcome to Anas's Account</h2>
 
     <!-- Include the Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
