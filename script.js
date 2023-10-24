@@ -10,7 +10,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-function loginOmar() {
+function login() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
@@ -18,24 +18,14 @@ function loginOmar() {
 
     auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            // Redirect to Omar's account page, passing the user's UID as a URL parameter
-            window.location.href = `omar_account.html?uid=${userCredential.user.uid}`;
-        })
-        .catch((error) => {
-            alert("Invalid email or password: " + error.message);
-        });
-}
-
-function loginAnas() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-
-    const auth = firebase.auth();
-
-    auth.signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-            // Redirect to Anas's account page, passing the user's UID as a URL parameter
-            window.location.href = `anas_account.html?uid=${userCredential.user.uid}`;
+            // Determine the appropriate account page based on user's email
+            if (email === "darkshadowplayz1@gmail.com") {
+                window.location.href = `omar_account.html?uid=${userCredential.user.uid}`;
+            } else if (email === "anas.mabdelmegid@hotmail.com") {
+                window.location.href = `anas_account.html?uid=${userCredential.user.uid}`;
+            } else {
+                alert("Invalid email or password");
+            }
         })
         .catch((error) => {
             alert("Invalid email or password: " + error.message);
